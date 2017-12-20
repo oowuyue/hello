@@ -30,7 +30,7 @@ func main() {
 	fmt.Println(stus)
 
 	var search int
-	var searchRes Student1
+	var searchRes []Student1
 	fmt.Println("输入要查找的分数：")
 	fmt.Scan(&search)
 	searchRes = binsearch(0, stuCount-1, search)
@@ -78,16 +78,27 @@ func quick(left int, right int) {
 
 }
 
-func binsearch(left int, right int, search int) Student1 {
+func binsearch(left int, right int, search int) []Student1 {
 
-	var result Student1
+	var result []Student1
 	if left > right {
 		return result
 	}
 	var middle = (left + right) / 2
 
 	if stus[middle].score == search {
-		return stus[middle]
+		result = append(result, stus[middle])
+		var tmp = middle + 1
+		for tmp <= right && stus[tmp].score == search {
+			result = append(result, stus[tmp])
+			tmp++
+		}
+		tmp = middle - 1
+		for tmp >= left && stus[tmp].score == search {
+			result = append(result, stus[tmp])
+			tmp--
+		}
+		return result
 	}
 
 	if stus[middle].score < search {
