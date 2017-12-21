@@ -46,6 +46,7 @@ func main() {
 	st.push(24)
 	st.push(66)
 	st.push(31)
+
 	st.push(12)
 
 	st.pop()
